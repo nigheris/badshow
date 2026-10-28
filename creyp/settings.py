@@ -24,12 +24,14 @@ def env_list(name, default):
 
 
 ALLOWED_HOSTS = env_list(
-    "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com"
+    "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com, badshow-eta.vercel.app"
 )
 CSRF_TRUSTED_ORIGINS = env_list(
     "CSRF_TRUSTED_ORIGINS",
     "http://localhost:8000,https://localhost:8000,"
     "http://127.0.0.1:8000,https://127.0.0.1:8000,"
+    'badshow-eta.vercel.app',
+    '.vercel.app',
     "https://*.app.github.dev,https://*.vercel.app,https://*.vercel.com",
 )
 LOGIN_URL = "/auth/account/login"
