@@ -23,9 +23,15 @@ def env_list(name, default):
     return [value.strip() for value in os.getenv(name, default).split(",") if value.strip()]
 
 
-ALLOWED_HOSTS = env_list(
-    "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com, badshow-eta.vercel.app"
-)
+# ALLOWED_HOSTS = env_list(
+#     "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com, badshow-eta.vercel.app"
+# )
+ALLOWED_HOSTS = [
+    'badshow-eta.vercel.app',
+    '.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
 CSRF_TRUSTED_ORIGINS = [
     'https://badshow-eta.vercel.app',
     'https://*.vercel.app',
