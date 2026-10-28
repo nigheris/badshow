@@ -27,9 +27,8 @@ ALLOWED_HOSTS = env_list(
     "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com, badshow-eta.vercel.app"
 )
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip() 
-    for origin in os.getenv('CSRF_TRUSTED_ORIGINS', 'https://badshow-eta.vercel.app').split(',') 
-    if origin.strip()
+    'https://badshow-eta.vercel.app',
+    'https://*.vercel.app',
 ]
 LOGIN_URL = "/auth/account/login"
 LOGIN_REDIRECT_URL = "/dashboard"
@@ -40,6 +39,9 @@ SECURE_SSL_REDIRECT = DEBUG == False
 SECURE_HSTS_SECONDS = 518400 if (DEBUG == False) else None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = DEBUG == False
 SECURE_HSTS_PRELOAD = DEBUG == False
+# settings.py
+
+USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = (
     ("HTTP_X_FORWARDED_PROTO", "https") if (DEBUG == False) else None
 )
