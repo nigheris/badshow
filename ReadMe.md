@@ -9,6 +9,18 @@ This is a Bitcoin Broker Site Created By __Divine Ikhuoria Ebehiremen__
 - HTML5
 - JAVASCRIPT [_ECMAScript_]
 
+## Dashboard UI Build
+
+The Django dashboard home uses a Vite-built React interface. Install the frontend dependencies and compile the assets before collecting static files or deploying:
+
+```sh
+npm install
+npm run build
+python manage.py collectstatic --noinput
+```
+
+Vite writes the compiled dashboard assets to `static/dashboard-ui/`; Django loads them from `dashboard/templates/dashboard/dashboard_home.html` with the static template tag.
+
 ## Road Map
 
 - __Login System__

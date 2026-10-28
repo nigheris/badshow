@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from django_countries import countries
 from users.models import Wallet, Profile, Transaction, AdminWallet
@@ -17,6 +18,7 @@ def dashboard_home_view(request):
         first_bal = bal[0]
         second_bal = bal[1]
         transactions = Transaction.objects.filter(wallet=request.user.profile.wallet)
+        visible_transactions = transactions.exclude(status="hidden")
         amount_invested = float(qs.amount_invested)
         if amount_invested == 0:
             for transaction in (
@@ -36,7 +38,30 @@ def dashboard_home_view(request):
             "amount_invested": amount_invested,
             "second_bal": second_bal,
             "crumbs_count": 1,
-            "transactions": transactions.exclude(status="hidden"),
+            "transactions": visible_transactions,
+            "dashboard_data": {
+                "balance": str(qs.balance),
+                "invested": str(amount_invested),
+                "transactionCount": visible_transactions.count(),
+                "userName": request.user.get_full_name() or request.user.username,
+                "transactions": [
+                    {
+                        "id": transaction.pk,
+                        "status": transaction.status,
+                        "msg": transaction.msg,
+                        "amount": transaction.amount,
+                        "transactionId": transaction.transactionId,
+                        "timestamp": transaction.timestamp.isoformat(),
+                    }
+                    for transaction in visible_transactions[:8]
+                ],
+                "urls": {
+                    "deposit": reverse("deposit"),
+                    "payments": reverse("dashboard-payment"),
+                    "referral": reverse("dashboard-referral"),
+                    "profile": reverse("dashboard-profile"),
+                },
+            },
         }
         return render(request, "dashboard/dashboard_home.html", context)
     else:

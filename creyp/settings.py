@@ -19,7 +19,19 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 USE_R2 = os.getenv("USE_R2", "False") == "True"
 
-ALLOWED_HOSTS = ["*"]
+def env_list(name, default):
+    return [value.strip() for value in os.getenv(name, default).split(",") if value.strip()]
+
+
+ALLOWED_HOSTS = env_list(
+    "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com"
+)
+CSRF_TRUSTED_ORIGINS = env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:8000,https://localhost:8000,"
+    "http://127.0.0.1:8000,https://127.0.0.1:8000,"
+    "https://*.app.github.dev,https://*.vercel.app,https://*.vercel.com",
+)
 LOGIN_URL = "/auth/account/login"
 LOGIN_REDIRECT_URL = "/dashboard"
 
