@@ -26,15 +26,10 @@ def env_list(name, default):
 # ALLOWED_HOSTS = env_list(
 #     "ALLOWED_HOSTS", "localhost,127.0.0.1,*.app.github.dev,*.vercel.app,*.vercel.com, badshow-eta.vercel.app"
 # )
-ALLOWED_HOSTS = [
-    'badshow-eta.vercel.app',
-    '.vercel.app',
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    'https://badshow-eta.vercel.app',
-    'https://*.vercel.app',
+   'badshow-eta.vercel.app',
+    '*.vercel.app',
 ]
 LOGIN_URL = "/auth/account/login"
 LOGIN_REDIRECT_URL = "/dashboard"
