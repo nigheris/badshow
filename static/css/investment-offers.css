@@ -1,0 +1,530 @@
+.investment-pricing,
+.special-offers-page {
+  --offer-ink: #142536;
+  --offer-muted: #687889;
+  --offer-accent: #1b8c72;
+  --offer-line: #e4ebe9;
+  color: var(--offer-ink);
+}
+
+.investment-pricing {
+  padding: 104px 0 88px;
+  background:
+    radial-gradient(ellipse at 10% 0, rgba(27, 140, 114, 0.08), transparent 34rem),
+    #f6f8f7;
+}
+
+.investment-heading {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.investment-eyebrow {
+  margin: 0 0 12px;
+  color: var(--offer-accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.investment-heading h1,
+.special-offers-hero h1 {
+  margin: 0 0 14px;
+  color: var(--offer-ink);
+  font-size: clamp(2.25rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+
+.investment-heading > p:not(.investment-eyebrow) {
+  margin: 0 auto 14px;
+  color: var(--offer-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.investment-payment-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #536759;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.investment-payment-note::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--offer-accent);
+  content: "";
+}
+
+.investment-plan-grid {
+  align-items: stretch;
+}
+
+.investment-plan-grid > div {
+  display: flex;
+}
+
+.investment-plan-card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid var(--offer-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 35px rgba(20, 37, 54, 0.045);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.investment-plan-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(27, 140, 114, 0.36);
+  box-shadow: 0 20px 46px rgba(20, 37, 54, 0.09);
+}
+
+.investment-plan-card.is-featured {
+  border-color: rgba(27, 140, 114, 0.52);
+  box-shadow: 0 16px 42px rgba(27, 140, 114, 0.1);
+}
+
+.investment-plan-top {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.investment-icon,
+.special-offer-icon {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #eaf5f1;
+  color: var(--offer-accent);
+  font-size: 1.25rem;
+}
+
+.investment-plan-label {
+  padding: 7px 10px;
+  border-radius: 100px;
+  background: #f0f4f3;
+  color: #576b68;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.is-featured .investment-plan-label {
+  background: #e5f4ee;
+  color: #16725e;
+}
+
+.investment-plan-card h2 {
+  margin: 0 0 8px;
+  color: var(--offer-ink);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.investment-plan-summary {
+  min-height: 48px;
+  margin: 0 0 22px;
+  color: var(--offer-muted);
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+.investment-plan-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 19px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid var(--offer-line);
+}
+
+.investment-plan-amount strong {
+  color: var(--offer-ink);
+  font-size: 1.85rem;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.investment-plan-amount span {
+  color: var(--offer-muted);
+  font-size: 0.84rem;
+}
+
+.investment-plan-features {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.investment-plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #415364;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.investment-plan-features i {
+  margin-top: 2px;
+  color: var(--offer-accent);
+  font-size: 1rem;
+}
+
+.investment-plan-features .is-unavailable {
+  color: #87939d;
+}
+
+.investment-plan-features .is-unavailable i {
+  color: #b7c0c6;
+}
+
+.investment-plan-button {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  border: 1px solid var(--offer-accent);
+  border-radius: 9px;
+  background: var(--offer-accent);
+  color: #fff !important;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.investment-plan-button:hover {
+  background: #146f5b;
+  color: #fff;
+}
+
+.investment-disclaimer {
+  max-width: 950px;
+  margin: 28px auto 0;
+  color: #718078;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.investment-more {
+  margin-top: 82px;
+  padding-top: 42px;
+  border-top: 1px solid #dfe7e4;
+}
+
+.investment-more-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.investment-more-heading h2 {
+  margin: 0;
+  color: var(--offer-ink);
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.investment-more-link,
+.special-offers-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--offer-accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.investment-more-link:hover,
+.special-offers-footer a:hover {
+  color: #116950;
+}
+
+.investment-offer-teaser {
+  display: flex;
+  height: 100%;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 20px;
+  border: 1px solid var(--offer-line);
+  border-radius: 13px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.investment-offer-teaser:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27, 140, 114, 0.48);
+  color: inherit;
+}
+
+.investment-offer-teaser > span {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #eaf5f1;
+  color: var(--offer-accent);
+}
+
+.investment-offer-teaser > div {
+  flex: 1;
+}
+
+.investment-offer-teaser h3 {
+  margin: 0 0 6px;
+  color: var(--offer-ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.investment-offer-teaser p {
+  margin: 0;
+  color: var(--offer-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.investment-offer-teaser > b {
+  color: var(--offer-accent);
+}
+
+.special-offers-hero {
+  padding: 78px 0 68px;
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(27, 140, 114, 0.12), transparent 32rem),
+    #f6f8f7;
+}
+
+.special-offers-back {
+  display: inline-block;
+  margin-bottom: 42px;
+  color: #536759;
+  font-size: 0.87rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.special-offers-back:hover {
+  color: var(--offer-accent);
+}
+
+.special-offers-hero .investment-eyebrow {
+  margin-bottom: 14px;
+}
+
+.special-offers-hero h1 {
+  max-width: 720px;
+}
+
+.special-offers-hero .container > p:last-child {
+  max-width: 680px;
+  margin: 0;
+  color: var(--offer-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.special-offers-list {
+  padding: 66px 0 88px;
+  background: #fff;
+}
+
+.special-offer-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid var(--offer-line);
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(20, 37, 54, 0.055);
+  scroll-margin-top: 110px;
+}
+
+.special-offer-icon {
+  width: 48px;
+  height: 48px;
+  flex-basis: 48px;
+  margin-bottom: 26px;
+  font-size: 1.4rem;
+}
+
+.special-offer-card .investment-eyebrow {
+  margin-bottom: 9px;
+  font-size: 0.69rem;
+}
+
+.special-offer-card h2 {
+  margin: 0 0 12px;
+  color: var(--offer-ink);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.special-offer-card > p:not(.investment-eyebrow) {
+  margin: 0 0 20px;
+  color: var(--offer-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.special-offer-card ul {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.special-offer-card li {
+  position: relative;
+  padding-left: 20px;
+  color: #415364;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.special-offer-card li::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--offer-accent);
+  content: "";
+}
+
+.special-offer-card > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  color: var(--offer-accent);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.special-offer-card > a:hover {
+  color: #116950;
+}
+
+.special-offers-notice {
+  margin-top: 36px;
+  padding: 24px 28px;
+  border: 1px solid #dce8e3;
+  border-radius: 13px;
+  background: #f5f9f7;
+}
+
+.special-offers-notice h2 {
+  margin: 0 0 8px;
+  color: var(--offer-ink);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.special-offers-notice p {
+  margin: 0;
+  color: #63736b;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.special-offers-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid var(--offer-line);
+}
+
+.special-offers-footer p {
+  margin: 0;
+  color: var(--offer-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+  .investment-pricing {
+    padding: 72px 0 64px;
+  }
+
+  .investment-plan-card,
+  .special-offer-card {
+    padding: 24px;
+  }
+
+  .investment-more {
+    margin-top: 58px;
+    padding-top: 32px;
+  }
+
+  .investment-more-heading,
+  .special-offers-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .special-offers-hero {
+    padding: 48px 0 52px;
+  }
+
+  .special-offers-back {
+    margin-bottom: 32px;
+  }
+
+  .special-offers-list {
+    padding: 42px 0 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .investment-plan-card,
+  .investment-plan-button,
+  .investment-offer-teaser {
+    transition: none;
+  }
+}

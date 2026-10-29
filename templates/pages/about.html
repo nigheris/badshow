@@ -1,123 +1,203 @@
 {% extends 'base.html' %}
 {% load static %}
-<title>{% block title %}About Us{% endblock title %}</title>
+
+{% block title %}About Us{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock css %}
+
 {% block content %}
-<!-- about section -->
-<section class="about section">
-  <div class="container">
-  <div class="row align-items-center">
-  <div class="col-lg-6 col-12">
-  <div class="image wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-  <img src="{% static 'images/about/about-image.png' %}" alt="#">
-  </div>
-  </div>
-  <div class="col-lg-6 col-12">
-  <div class="content wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-  <h4>DECENTRALISED ECONOMY</h4>
-  <h2>We’ve built a platform to invest in Cryptocurrency.</h2>
-  <p>Individuals can buy, use, and store them securely with our digital wallet and financial services. 
-    Businesses get access to the tools they need to accept cryptocurrency payments. 
-    Everyone who visits us can learn about the future of money from a trusted source.
-    To deliver on that promise, we have come to work every day since 2013 to create the simplest bitcoin financial service out there - 
-    spoken in a language you can understand, and backed by customer service you can count on.</p>
-  <div class="list">
-  <div class="single-list">
-  <div class="list-icon">
-  <i class="lni lni-checkmark"></i>
-  </div>
-  <h4>Modular structure</h4>
-  <p>The way we trade your bitcoin is in a modernize structure</p>
-  </div>
-  <div class="single-list">
-  <div class="list-icon">
-  <i class="lni lni-checkmark"></i>
-  </div>
-  <h4>Insurance</h4>
-  <p>We have $230 Million as Insurance, incase anything happen to your money</p>
-  </div>
-  <div class="single-list">
-  <div class="list-icon">
-  <i class="lni lni-checkmark"></i>
-  </div>
-  <h4>Mining Service</h4>
-  <p>We also created a way to mine only bitcoin, only if you deposit above $5,000</p>
-  </div>
-  <div class="single-list">
-    <div class="list-icon">
-    <i class="lni lni-checkmark"></i>
+<main class="about-page">
+  <section class="about-hero" aria-labelledby="about-title">
+    <div class="about-shell about-hero-grid">
+      <div class="about-hero-copy">
+        <p class="about-eyebrow"><span></span>Our mission</p>
+        <h1 id="about-title">More people deserve a clearer path to private markets.</h1>
+        <p class="about-hero-intro">We want to make private equity and a broader range of assets easier for everyday investors to understand and explore—so individuals and families can make informed choices for their long-term financial goals.</p>
+        <div class="about-hero-actions">
+          <a class="about-button about-button-primary" href="{% url 'special-offers' %}">Explore investment options <span aria-hidden="true">&rarr;</span></a>
+          <a class="about-text-link" href="#our-approach">How we think about investing</a>
+        </div>
+        <p class="about-hero-note">Availability, eligibility, liquidity, and risk vary by investment. Diversification does not assure a profit or protect against loss.</p>
+      </div>
+      <div class="about-hero-art" aria-hidden="true">
+        <div class="about-art-orbit about-art-orbit-one"></div>
+        <div class="about-art-orbit about-art-orbit-two"></div>
+        <div class="about-art-center"><span class="about-art-mark">C</span><span>Long-term<br />perspective</span></div>
+        <span class="about-art-node about-art-node-one"><i class="lni lni-apartment"></i></span>
+        <span class="about-art-node about-art-node-two"><i class="lni lni-investment"></i></span>
+        <span class="about-art-node about-art-node-three"><i class="lni lni-users"></i></span>
+        <span class="about-art-caption">Built around people, not jargon</span>
+      </div>
     </div>
-    <h4>Refundable</h4>
-    <p>Money is <b>refundable</b> and you be able to get your money back within 2days after our team verify your identity</p>
-    </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
   </section>
-<!-- end about section -->
-<!-- steps section -->
-<section class="start-process dark section">
-  <div class="container">
-  <div class="row">
-  <div class="col-12">
-  <div class="section-title">
-  <h3 class="wow zoomIn" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">Ready to get started?</h3>
-  <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">3 Steps To Start</h2>
-  <p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">There are many variations of passages of Lorem
-  Ipsum available, but the majority have suffered alteration in some form.</p>
-  </div>
-  </div>
-  </div>
-  <div class="row">
-  <div class="col-lg-4 col-md-4 col-12">
-  <div class="single-process">
-  <span class="serial">01</span>
-  <h3>Create Your Account & Wallet</h3>
-  <p>Firstly, create an account and verify your email<p>
-  </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-12">
-  <div class="single-process">
-  <span class="serial">02</span>
-  <h3>Make Payment</h3>
-  <p>Deposit your idle money, with our minimum as $500.</p>
-  </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-12">
-  <div class="single-process">
-  <span class="serial">03</span>
-  <h3>Invest</h3>
-  <p>CreypInvest trained Al will predict and trade your bitcoin in the stocks market</p>
-  </div>
-  </div>
-  </div>
-  </div>
+
+  <section class="about-mission" aria-labelledby="mission-title">
+    <div class="about-shell about-mission-grid">
+      <div>
+        <p class="about-eyebrow">A more inclusive investment conversation</p>
+        <h2 id="mission-title">Private markets can feel out of reach. We’re here to make the landscape easier to navigate.</h2>
+      </div>
+      <div class="about-mission-copy">
+        <p>Our mission is to help more people understand investment choices beyond traditional public markets. That means explaining how different assets work, what they may add to a portfolio, and the risks and trade-offs that come with them.</p>
+        <p>We believe long-term planning should make room for individual goals and family priorities. Our focus is on clear information, thoughtful diversification, and responsive service—not promises of returns or one-size-fits-all answers.</p>
+      </div>
+    </div>
   </section>
-  <div class="client-logo">
-    <div class="container">
-    <div class="row align-items-center">
-    <div class="col-lg-3 col-md-3 col-12 text-center">
-    <div class="single-logo">
-    <img src="{% static 'images/client-logo/Alphabet_Inc_logo.svg' %}" alt="#">
+
+  <section class="about-approach" id="our-approach" aria-labelledby="approach-title">
+    <div class="about-shell">
+      <div class="about-section-heading">
+        <div>
+          <p class="about-eyebrow">What guides us</p>
+          <h2 id="approach-title">A thoughtful approach to building wealth.</h2>
+        </div>
+        <p>Good investment decisions start with understanding the options, the risks, and how they fit into the bigger picture.</p>
+      </div>
+      <div class="about-principles">
+        <article class="about-principle">
+          <span class="about-principle-number">01</span>
+          <span class="about-principle-icon" aria-hidden="true"><i class="lni lni-unlock"></i></span>
+          <h3>Make access easier to understand</h3>
+          <p>Bring plain-language information to a part of investing that can feel complex, while being clear about eligibility and availability.</p>
+        </article>
+        <article class="about-principle">
+          <span class="about-principle-number">02</span>
+          <span class="about-principle-icon" aria-hidden="true"><i class="lni lni-pie-chart"></i></span>
+          <h3>Look beyond a single asset</h3>
+          <p>Explore how different asset types may contribute to a portfolio, with diversification viewed as a consideration—not a guarantee against loss.</p>
+        </article>
+        <article class="about-principle">
+          <span class="about-principle-number">03</span>
+          <span class="about-principle-icon" aria-hidden="true"><i class="lni lni-handshake"></i></span>
+          <h3>Put people and service first</h3>
+          <p>Support informed decisions with straightforward communication and a long-term perspective on individual and family wealth goals.</p>
+        </article>
+      </div>
     </div>
+  </section>
+
+  <section class="about-leadership" aria-labelledby="leadership-title">
+    <div class="about-shell">
+      <div class="about-section-heading about-leadership-heading">
+        <div>
+          <p class="about-eyebrow">People &amp; governance</p>
+          <h2 id="leadership-title">Leadership is about accountability.</h2>
+        </div>
+        <p>Meet the key roles that support investment decisions, oversight, and investor service.</p>
+      </div>
+      <p class="about-profile-disclosure">These are illustrative leadership role profiles, not confirmed appointments. Portraits are illustrative stock imagery. Names, biographies, and qualifications should be verified before publication.</p>
+
+      <ul class="about-leader-track" aria-label="Illustrative leadership roles" tabindex="0">
+        <li>
+          <article class="about-leader-card" tabindex="0">
+            <img src="{% static 'images/team/team1.jpg' %}" alt="Illustrative portrait for the Managing Partner role" loading="lazy" />
+            <div class="about-leader-overlay">
+              <span class="about-leader-index">01 / LEADERSHIP</span>
+              <div class="about-leader-details">
+                <p>Illustrative role</p>
+                <h3>Managing Partner</h3>
+                <span>Strategy, governance &amp; stewardship</span>
+                <div class="about-leader-bio">Provides direction for the organization and supports responsible, long-term decision-making.</div>
+              </div>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="about-leader-card" tabindex="0">
+            <img src="{% static 'images/team/team2.jpg' %}" alt="Illustrative portrait for the Investment Strategy Lead role" loading="lazy" />
+            <div class="about-leader-overlay">
+              <span class="about-leader-index">02 / INVESTMENT</span>
+              <div class="about-leader-details">
+                <p>Illustrative role</p>
+                <h3>Investment Strategy Lead</h3>
+                <span>Research, asset review &amp; portfolio context</span>
+                <div class="about-leader-bio">Helps assess investment opportunities, their underlying risks, and how they relate to stated objectives.</div>
+              </div>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="about-leader-card" tabindex="0">
+            <img src="{% static 'images/team/team3.jpg' %}" alt="Illustrative portrait for the Risk and Compliance Lead role" loading="lazy" />
+            <div class="about-leader-overlay">
+              <span class="about-leader-index">03 / OVERSIGHT</span>
+              <div class="about-leader-details">
+                <p>Illustrative role</p>
+                <h3>Risk &amp; Compliance Lead</h3>
+                <span>Controls, conduct &amp; investor safeguards</span>
+                <div class="about-leader-bio">Focuses on risk oversight and clear processes that support responsible business practices.</div>
+              </div>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="about-leader-card" tabindex="0">
+            <img src="{% static 'images/team/team4.jpg' %}" alt="Illustrative portrait for the Investor Relations Lead role" loading="lazy" />
+            <div class="about-leader-overlay">
+              <span class="about-leader-index">04 / INVESTOR CARE</span>
+              <div class="about-leader-details">
+                <p>Illustrative role</p>
+                <h3>Investor Relations Lead</h3>
+                <span>Communication, reporting &amp; support</span>
+                <div class="about-leader-bio">Helps investors find clear information and understand account updates and available support.</div>
+              </div>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="about-leader-card" tabindex="0">
+            <img src="{% static 'images/testimonial/JeniferHolman.jpg' %}" alt="Illustrative portrait for the Family Wealth Planning Lead role" loading="lazy" />
+            <div class="about-leader-overlay">
+              <span class="about-leader-index">05 / FAMILY WEALTH</span>
+              <div class="about-leader-details">
+                <p>Illustrative role</p>
+                <h3>Family Wealth Planning Lead</h3>
+                <span>Goals, continuity &amp; long-term planning</span>
+                <div class="about-leader-bio">Considers how financial goals and family priorities shape long-term planning conversations.</div>
+              </div>
+            </div>
+          </article>
+        </li>
+      </ul>
+      <p class="about-scroll-hint">Scroll to explore leadership <span aria-hidden="true">&rarr;</span></p>
     </div>
-    <div class="col-lg-3 col-md-3 col-12 text-center">
-    <div class="single-logo">
-    <img src="{% static 'images/client-logo/TechCrunch_logo.svg' %}" alt="#">
+  </section>
+
+  <section class="about-partners" aria-labelledby="partners-title">
+    <div class="about-partners-heading">
+      <p class="about-eyebrow">The wider landscape</p>
+      <h2 id="partners-title">Organizations shaping the conversation.</h2>
+      <p>Explore the wider ecosystem of technology, business, and investment news.</p>
     </div>
+    <div class="about-marquee" aria-label="Organizations in the wider business and technology landscape">
+      <div class="about-marquee-track">
+        <div class="about-marquee-group">
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/Alphabet_Inc_logo.svg' %}" alt="Alphabet" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/TechCrunch_logo.svg' %}" alt="TechCrunch" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/TacoBell_logo.svg' %}" alt="Taco Bell" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/Tencent_Logo.svg' %}" alt="Tencent" loading="lazy" /></span>
+        </div>
+        <div class="about-marquee-group" aria-hidden="true">
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/Alphabet_Inc_logo.svg' %}" alt="" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/TechCrunch_logo.svg' %}" alt="" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/TacoBell_logo.svg' %}" alt="" loading="lazy" /></span>
+          <span class="about-marquee-item"><img src="{% static 'images/client-logo/Tencent_Logo.svg' %}" alt="" loading="lazy" /></span>
+        </div>
+      </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-12 text-center">
-    <div class="single-logo">
-    <img src="{% static 'images/client-logo/TacoBell_logo.svg' %}" alt="#">
+    <p class="about-logo-disclosure">Logos are trademarks of their respective owners and are shown for general informational purposes only. Their display does not imply a partnership, affiliation, or endorsement.</p>
+  </section>
+
+  <section class="about-closing">
+    <div class="about-shell about-closing-inner">
+      <div>
+        <p class="about-eyebrow">Start with a conversation</p>
+        <h2>Make your next financial decision with more context.</h2>
+      </div>
+      <a class="about-button about-button-light" href="{% url 'contact-us' %}">Talk with our team <span aria-hidden="true">&rarr;</span></a>
     </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-12 text-center">
-    <div class="single-logo">
-    <img src="{% static 'images/client-logo/Tencent_Logo.svg' %}" alt="#">
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </section>
+</main>
 {% endblock content %}

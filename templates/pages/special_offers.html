@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Special Offers{% endblock title %}
+
+{% block content %}
+<main class="special-offers-page">
+  <section class="special-offers-hero">
+    <div class="container">
+      <a class="special-offers-back" href="{% url 'deposit' %}">&larr; Back to investment plans</a>
+      <p class="investment-eyebrow">Options for different goals</p>
+      <h1>Explore special offers</h1>
+      <p>Every investor has a different time horizon and set of priorities. Explore these options and review the full terms before deciding whether one is right for you.</p>
+    </div>
+  </section>
+
+  <section class="special-offers-list section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-lg-4" id="retirement">
+          <article class="special-offer-card">
+            <span class="special-offer-icon" aria-hidden="true"><i class="lni lni-calendar"></i></span>
+            <p class="investment-eyebrow">Long-term planning</p>
+            <h2>Retirement investing</h2>
+            <p>Explore an investment approach with your retirement timeline, liquidity needs, and comfort with risk in mind.</p>
+            <ul>
+              <li>Discuss your time horizon and objectives</li>
+              <li>Review fees, withdrawal terms, and risks</li>
+              <li>Read the offering documents before investing</li>
+            </ul>
+            <a href="{% url 'contact-us' %}">Ask about this option <span aria-hidden="true">&rarr;</span></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-lg-4" id="real-estate-bonds">
+          <article class="special-offer-card">
+            <span class="special-offer-icon" aria-hidden="true"><i class="lni lni-apartment"></i></span>
+            <p class="investment-eyebrow">Property-linked option</p>
+            <h2>Real estate bonds</h2>
+            <p>Before considering a bond, understand the issuer and how the investment is structured and repaid.</p>
+            <ul>
+              <li>Check the issuer, maturity, and payment schedule</li>
+              <li>Understand collateral and liquidity limitations</li>
+              <li>Review default and market risks</li>
+            </ul>
+            <a href="{% url 'contact-us' %}">Ask about this option <span aria-hidden="true">&rarr;</span></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-lg-4" id="couples">
+          <article class="special-offer-card">
+            <span class="special-offer-icon" aria-hidden="true"><i class="lni lni-users"></i></span>
+            <p class="investment-eyebrow">Shared goals</p>
+            <h2>Investing as a couple</h2>
+            <p>Start a conversation about aligning financial goals and agreeing on how you will manage contributions and access.</p>
+            <ul>
+              <li>Set shared goals and contribution expectations</li>
+              <li>Clarify ownership and account access</li>
+              <li>Discuss withdrawal and decision-making processes</li>
+            </ul>
+            <a href="{% url 'contact-us' %}">Ask about this option <span aria-hidden="true">&rarr;</span></a>
+          </article>
+        </div>
+      </div>
+
+      <aside class="special-offers-notice">
+        <h2>Review the details before you commit</h2>
+        <p>These descriptions are general information, not a promise that a specific product is available or suitable for you. Investing involves risk, including possible loss of principal. Confirm availability, fees, eligibility, and all terms in current written offering documents, and consider independent financial, legal, and tax advice.</p>
+      </aside>
+
+      <div class="special-offers-footer">
+        <p>Want to compare the plans already listed?</p>
+        <a href="{% url 'deposit' %}">View investment plans <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

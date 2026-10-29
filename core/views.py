@@ -77,6 +77,10 @@ def contact(request):
     return render(request, "pages/contact.html", {"type": "Contact Support Team At CreypInvest Inc.", "crumbs": ["Contact Us"]})
 
 @update_user_ip
+def special_offers(request):
+    return render(request, "pages/special_offers.html")
+
+@update_user_ip
 def send_contact_email(request):
     res = render(request, "pages/message_page.html",
                  {"title": "Oops", "msg": "Sorry, something is wrong with the server but you can mail us at <a href='mailto:creypinvest@gmail.com'>creypinvest@gmail.com</a>"})

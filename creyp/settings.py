@@ -28,8 +28,9 @@ def env_list(name, default):
 # )
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-   'badshow-eta.vercel.app',
-    '*.vercel.app',
+    'https://badshow-eta.vercel.app',
+    'https://*.vercel.app',
+    'https://localhost:8000'
 ]
 LOGIN_URL = "/auth/account/login"
 LOGIN_REDIRECT_URL = "/dashboard"
@@ -222,10 +223,25 @@ STATICFILES_DIRS = [
 ]
 
 # Email (Resend via Anymail)
-EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
-ANYMAIL = {
-    "RESEND_API_KEY": os.getenv("RESEND_API_KEY"),
-}
+# EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+# ANYMAIL = {
+#     "RESEND_API_KEY": os.getenv("RESEND_API_KEY"),
+# }
+#new code to check for RESEND_API_KEY in both RESEND_API_KEY and ANYMAIL_RESEND_API_KEY environment variables
+RESEND_API_KEY = os.getenv('RESEND_API_KEY') or os.getenv('ANYMAIL_RESEND_API_KEY')
+
+if RESEND_API_KEY:
+    # Production / Live: Use Resend via django-anymail
+    EMAIL_BACKEND = 'anymail.backends.resend.EmailBackend'
+    ANYMAIL = {
+        'RESEND_API_KEY': RESEND_API_KEY,
+    }
+else:
+    # Local / Fallback: Print emails to the terminal console
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Optional default sender address
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
 
 # Must be an address on a domain verified in Resend
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")

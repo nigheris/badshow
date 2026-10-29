@@ -1,87 +1,108 @@
-<section class="price_plan_area section_padding_130_80 section" id="pricing">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-lg-6">
-          <!-- Section Heading-->
-          <div class="section-heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <h6>Take Bitcoin Investment To Another Level</h6>
-            <h3>Let's find a way together</h3>
-            <p>We at CreypInvest Inc. has found the cheapest way to get a monthly interests investment plans</p>
-            <small>*we currently accept only bitcoin*</small>
-            <div class="line"></div>
+<section class="investment-pricing section" id="pricing">
+  <div class="container">
+    <div class="investment-heading">
+      <p class="investment-eyebrow">Choose your starting point</p>
+      <h1>Investment plans</h1>
+      <p>Compare the currently listed plans, then review the details and risks before making a decision.</p>
+      <span class="investment-payment-note">Bitcoin is currently the only accepted payment method.</span>
+    </div>
+
+    <div class="row g-4 investment-plan-grid">
+      <div class="col-12 col-md-6 col-xl-4">
+        <article class="investment-plan-card">
+          <div class="investment-plan-top">
+            <span class="investment-icon" aria-hidden="true"><i class="lni lni-user"></i></span>
+            <span class="investment-plan-label">For new investors</span>
           </div>
-        </div>
+          <h2>Starter</h2>
+          <p class="investment-plan-summary">A first step for investors exploring the listed plans.</p>
+          <div class="investment-plan-amount"><strong>$500</strong><span>to $5,000</span></div>
+          <ul class="investment-plan-features">
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>10% monthly interest*</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>5 US stocks from $1,000</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>No hidden fees</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>Roundup to the next whole number</li>
+            <li class="is-unavailable"><i class="lni lni-close" aria-hidden="true"></i>Miner tools</li>
+          </ul>
+          <a class="investment-plan-button" href="{% url 'deposit_amount' 'starter' %}">Get started <span aria-hidden="true">&rarr;</span></a>
+        </article>
       </div>
-      <div class="row justify-content-center">
-        <!-- Single Price Plan Area-->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-          <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <div class="title">
-              <h3>Starter</h3>
-              <p>For New Investors</p>
-              <div class="line"></div>
-            </div>
-            <div class="price">
-              <h4>$500</h4>
-              <h5>to $5,000</h5>
-            </div>
-            <div class="description">
-              <p><i class="lni lni-checkmark-circle"></i>10% Monthly Interests</p>
-              <p><i class="lni lni-checkmark-circle"></i>5 US Stocks from $1,000</p>
-              <p><i class="lni lni-close"></i>No Hidden Fees</p>
-              <p><i class="lni lni-close"></i>Roundup Remains To Next Whole Number</p>
-              <p><i class="lni lni-close"></i>Miner Tools</p>
-            </div>
-            <div class="button"><a class="btn btn-success btn-2" href="{% url 'deposit_amount' 'starter' %}">Get Started</a></div>
+
+      <div class="col-12 col-md-6 col-xl-4">
+        <article class="investment-plan-card is-featured">
+          <div class="investment-plan-top">
+            <span class="investment-icon" aria-hidden="true"><i class="lni lni-bar-chart"></i></span>
+            <span class="investment-plan-label">Popular</span>
           </div>
-        </div>
-        <!-- Single Price Plan Area-->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-          <div class="single_price_plan active wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <!-- Side Shape-->
-            <div class="side-shape"><img src="https://bootdey.com/img/popular-pricing.png" alt=""></div>
-            <div class="title"><span>Popular</span>
-              <h3>Exchange-Traded Funds</h3>
-              <p>For Advanced Investors</p>
-              <div class="line"></div>
-            </div>
-            <div class="price">
-              <h4>$10,000</h4>
-              <h5>to $15,000</h5>
-            </div>
-            <div class="description">
-              <p><i class="lni lni-checkmark-circle"></i>20% Monthly Interests</p>
-              <p><i class="lni lni-checkmark-circle"></i>10 US Stocks</p>
-              <p><i class="lni lni-checkmark-circle"></i>No Hidden Fees</p>
-              <p><i class="lni lni-checkmark-circle"></i>Roundup Remains To Next Whole Number</p>
-              <p><i class="lni lni-close"></i>Miner Tools</p>
-            </div>
-            <div class="button"><a class="btn btn-warning" href="{% url 'deposit_amount' 'exchange-traded-funds' %}">Get Started</a></div>
+          <h2>Exchange-Traded Funds</h2>
+          <p class="investment-plan-summary">For investors looking to explore a broader listed plan.</p>
+          <div class="investment-plan-amount"><strong>$10,000</strong><span>to $15,000</span></div>
+          <ul class="investment-plan-features">
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>20% monthly interest*</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>10 US stocks</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>No hidden fees</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>Roundup to the next whole number</li>
+            <li class="is-unavailable"><i class="lni lni-close" aria-hidden="true"></i>Miner tools</li>
+          </ul>
+          <a class="investment-plan-button" href="{% url 'deposit_amount' 'exchange-traded-funds' %}">Get started <span aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-xl-4">
+        <article class="investment-plan-card">
+          <div class="investment-plan-top">
+            <span class="investment-icon" aria-hidden="true"><i class="lni lni-investment"></i></span>
+            <span class="investment-plan-label">For experienced investors</span>
           </div>
-        </div>
-        <!-- Single Price Plan Area-->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-          <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            <div class="title">
-              <h3>Expert Trader</h3>
-              <p>Unlimited Possibilities</p>
-              <div class="line"></div>
-            </div>
-            <div class="price">
-              <h4>$25,000</h4>
-              <h5>and above.</h5>
-            </div>
-            <div class="description">
-              <p><i class="lni lni-checkmark-circle"></i>40% Monthly Interests</p>
-              <p><i class="lni lni-checkmark-circle"></i>All US Stocks</p>
-              <p><i class="lni lni-checkmark-circle"></i>No Hidden Fees</p>
-              <p><i class="lni lni-checkmark-circle"></i>Roundup Remains To Next Whole Number</p>
-              <p><i class="lni lni-checkmark-circle"></i>Unlimited Stocks Insider Tips</p>
-              <p><i class="lni lni-checkmark-circle"></i>Miner Tools</p>
-            </div>
-            <div class="button"><a class="btn btn-info" href="{% url 'deposit_amount' 'expert-trader' %}">Get Started</a></div>
-          </div>
-        </div>
+          <h2>Expert Trader</h2>
+          <p class="investment-plan-summary">A listed option for investors seeking access to additional tools.</p>
+          <div class="investment-plan-amount"><strong>$25,000</strong><span>and above</span></div>
+          <ul class="investment-plan-features">
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>40% monthly interest*</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>All US stocks</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>No hidden fees</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>Roundup to the next whole number</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>Unlimited stocks insider tips</li>
+            <li><i class="lni lni-checkmark-circle" aria-hidden="true"></i>Miner tools</li>
+          </ul>
+          <a class="investment-plan-button" href="{% url 'deposit_amount' 'expert-trader' %}">Get started <span aria-hidden="true">&rarr;</span></a>
+        </article>
       </div>
     </div>
-  </section>
+
+    <p class="investment-disclaimer">*Review all rates, fees, eligibility, and withdrawal terms in the applicable written offering documents. Investment values can go down as well as up, and you may lose some or all of your investment. This page is for general information and is not financial advice.</p>
+
+    <section class="investment-more" aria-labelledby="investment-more-title">
+      <div class="investment-more-heading">
+        <div>
+          <p class="investment-eyebrow">More ways to invest</p>
+          <h2 id="investment-more-title">Looking for something more tailored?</h2>
+        </div>
+        <a class="investment-more-link" href="{% url 'special-offers' %}">Explore all special offers <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <a class="investment-offer-teaser" href="{% url 'special-offers' %}#retirement">
+            <span aria-hidden="true"><i class="lni lni-calendar"></i></span>
+            <div><h3>Retirement investing</h3><p>Consider your time horizon, income needs, and access to funds.</p></div>
+            <b aria-hidden="true">&rarr;</b>
+          </a>
+        </div>
+        <div class="col-12 col-md-4">
+          <a class="investment-offer-teaser" href="{% url 'special-offers' %}#real-estate-bonds">
+            <span aria-hidden="true"><i class="lni lni-apartment"></i></span>
+            <div><h3>Real estate bonds</h3><p>Review issuer, maturity, payment terms, and risks.</p></div>
+            <b aria-hidden="true">&rarr;</b>
+          </a>
+        </div>
+        <div class="col-12 col-md-4">
+          <a class="investment-offer-teaser" href="{% url 'special-offers' %}#couples">
+            <span aria-hidden="true"><i class="lni lni-users"></i></span>
+            <div><h3>Investing together</h3><p>Explore shared goals, contributions, and account access.</p></div>
+            <b aria-hidden="true">&rarr;</b>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
