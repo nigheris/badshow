@@ -904,7 +904,7 @@ body:has(.home-page) .header .button .btn {
 
 .team-track {
   display: grid;
-  grid-auto-columns: minmax(255px, 30%);
+  grid-auto-columns: minmax(255px, 27%);
   grid-auto-flow: column;
   gap: 14px;
   margin: 0;
@@ -1429,8 +1429,8 @@ body:has(.home-page) .header .button .btn {
   }
 
   .team-track {
-    grid-auto-columns: minmax(0, 82%);
-    gap: 11px;
+    grid-auto-columns:minmax(255px, 27%);
+    gap: 5px;
   }
 
   .team-profile-card summary {

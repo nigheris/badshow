@@ -338,12 +338,21 @@
 }
 
 .about-leadership {
-  padding: 95px 0 90px;
+  padding: clamp(3rem, 7vw, 5.9375rem) 0;
   background: #fff;
 }
 
 .about-leadership-heading {
   margin-bottom: 20px;
+}
+
+.about-leadership-heading > div,
+.about-leadership-heading > p {
+  min-width: 0;
+}
+
+.about-leadership-heading h2 {
+  font-size: clamp(1.75rem, 4.5vw, 3.1rem);
 }
 
 .about-profile-disclosure {
@@ -352,8 +361,9 @@
   padding-left: 13px;
   border-left: 2px solid #87b7a5;
   color: #73847d;
-  font-size: 0.74rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.74rem);
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .about-leader-track {
@@ -417,6 +427,7 @@
 
 .about-leader-index {
   align-self: flex-start;
+  max-width: 100%;
   padding: 7px 9px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
@@ -425,9 +436,11 @@
   font-size: 0.57rem;
   font-weight: 700;
   letter-spacing: 0.1em;
+  overflow-wrap: anywhere;
 }
 
 .about-leader-details {
+  min-width: 0;
   transform: translateY(14px);
   transition: transform 240ms ease;
 }
@@ -448,6 +461,7 @@
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .about-leader-details > span {
@@ -455,6 +469,7 @@
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.73rem;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .about-leader-bio {
@@ -465,6 +480,7 @@
   font-size: 0.75rem;
   line-height: 1.65;
   opacity: 0;
+  overflow-wrap: anywhere;
   transition: max-height 240ms ease, margin 240ms ease, opacity 240ms ease;
 }
 
@@ -650,7 +666,7 @@
   }
 
   .about-leader-track {
-    grid-auto-columns: minmax(250px, 36%);
+    grid-auto-columns: minmax(255px, 27%);
   }
 }
 
@@ -722,9 +738,12 @@
   }
 
   .about-mission,
-  .about-approach,
-  .about-leadership {
+  .about-approach {
     padding: 64px 0;
+  }
+
+  .about-leadership {
+    padding: clamp(3rem, 9vw, 4rem) 0;
   }
 
   .about-mission-grid {
@@ -745,6 +764,10 @@
     margin-top: 14px;
   }
 
+  .about-leadership-heading h2 {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+  }
+
   .about-principles {
     grid-template-columns: 1fr;
     gap: 11px;
@@ -760,22 +783,30 @@
   }
 
   .about-leader-track {
-    grid-auto-columns: minmax(0, 82%);
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
+    overflow-x: visible;
+    padding: 0 2px;
   }
 
   .about-leader-card {
-    height: 390px;
+    height: clamp(340px, 105vw, 390px);
   }
 
   .about-leader-bio {
-    max-height: 90px;
+    max-height: none;
     margin-top: 11px;
+    overflow: visible;
     opacity: 1;
   }
 
   .about-leader-details {
     transform: none;
+  }
+
+  .about-scroll-hint {
+    display: none;
   }
 
   .about-marquee {
@@ -805,6 +836,20 @@
   .about-closing-inner {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-leader-track {
+    gap: 10px;
+  }
+
+  .about-leader-card {
+    height: clamp(320px, 100vw, 360px);
+  }
+
+  .about-leader-overlay {
+    padding: clamp(14px, 5vw, 19px);
   }
 }
 
