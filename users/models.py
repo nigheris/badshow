@@ -54,10 +54,21 @@ class Profile(models.Model):
         return self.user.last_name
 
     def save(self, *args, **kwargs):
-        if self.image:
-            super().save(*args, **kwargs)
-            if self.image.storage.exists(self.image.name):
-                image_resize(self.image, 512, 512)
+        image_changed = self._state.adding
+        if self.pk:
+            original_image_name = (
+                type(self).objects.filter(pk=self.pk)
+                .values_list("image", flat=True)
+                .first()
+            )
+            image_changed = (
+                self.image.name != original_image_name or not self.image._committed
+            )
+
+        super().save(*args, **kwargs)
+
+        if image_changed and self.image and self.image.storage.exists(self.image.name):
+            image_resize(self.image, 512, 512)
 
 
 class Wallet(models.Model):
