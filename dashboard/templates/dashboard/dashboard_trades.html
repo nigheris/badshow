@@ -1,0 +1,15 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'dashboard-ui/dashboard.css' %}" />
+{% endblock css %}
+{% block head_title %}{{title}}{% endblock head_title %}
+{% block content %}
+{{ trade_data|json_script:"trade-data" }}
+<div id="trades-widget-root">
+  <p>Loading open trade listings...</p>
+</div>
+{% endblock content %}
+{% block page_scripts %}
+<script type="module" src="{% static 'dashboard-ui/dashboard.js' %}"></script>
+{% endblock page_scripts %}

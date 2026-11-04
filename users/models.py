@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
@@ -14,6 +15,7 @@ STATUS = (
     ("pending", "pending"),
     ("hidden", "hidden"),
     ("credit", "credit"),
+    ("trade-debit", "trade debit"),
     ("processing", "processing"),
     ("confirming", "confirming"),
     ("error", "error"),
@@ -127,6 +129,94 @@ class AdminTransaction(models.Model):
             return f"{self.wallet.btc_address} debited ${self.amount}"
         else:
             return f"{self.wallet.btc_address} transfered ${self.amount}"
+
+
+class Trade(models.Model):
+    STATUS_OPEN = "open"
+    STATUS_CLOSED = "closed"
+    STATUS_CHOICES = (
+        (STATUS_OPEN, "Open"),
+        (STATUS_CLOSED, "Closed"),
+    )
+
+    title = models.CharField(max_length=120)
+    symbol = models.CharField(max_length=20)
+    description = models.TextField(blank=True)
+    is_demo = models.BooleanField(default=False)
+    demo_owner = models.ForeignKey(
+        User,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="demo_trades",
+    )
+    entry_price = models.DecimalField(
+        max_digits=14, decimal_places=2, validators=[MinValueValidator(0.01)]
+    )
+    target_price = models.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(0)],
+    )
+    minimum_investment = models.DecimalField(
+        max_digits=14, decimal_places=2, validators=[MinValueValidator(0.01)]
+    )
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default=STATUS_OPEN
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at", "-id"]
+
+    def __str__(self):
+        return f"{self.symbol} - {self.title}"
+
+
+class TradeParticipation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    trade = models.ForeignKey(Trade, on_delete=models.PROTECT, related_name="positions")
+    amount = models.DecimalField(max_digits=14, decimal_places=2)
+    payout_amount = models.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(0)],
+        help_text="Amount to credit when an admin settles this closed trade position.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    paid_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ["-created_at", "-id"]
+
+    @property
+    def is_closed(self):
+        return self.trade.status == Trade.STATUS_CLOSED
+
+    def __str__(self):
+        return f"{self.user.username} - {self.trade.symbol} - ${self.amount}"
+
+
+class TradeWatchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    trade = models.ForeignKey(Trade, on_delete=models.PROTECT, related_name="watchers")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "trade"], name="unique_user_trade_watchlist"
+            )
+        ]
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.username} watching {self.trade.symbol}"
 
 
 @receiver(post_save, sender=User)

@@ -1,10 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.middleware.csrf import get_token
+from django.views.decorators.http import require_POST
 
 from django_countries import countries
-from users.models import Wallet, Profile, Transaction, AdminWallet
+from users.models import (
+    AdminWallet,
+    Profile,
+    Trade,
+    TradeParticipation,
+    TradeWatchlist,
+    Transaction,
+    Wallet,
+)
 from users.decorators import update_user_ip, deposit_before
+from users.trades import add_to_watchlist, remove_from_watchlist, take_trade
 
 
 @update_user_ip
@@ -178,6 +192,99 @@ def dashboard_payments_view(request):
         return render(request, "dashboard/dashboard_payments.html", context)
     else:
         redirect("/auth/account/login?next=/dashboard/payments/")
+
+
+@update_user_ip
+@deposit_before
+def dashboard_trades_view(request):
+    if request.user.is_authenticated:
+        open_trades = Trade.objects.filter(status=Trade.STATUS_OPEN)
+        watchlist = TradeWatchlist.objects.filter(user=request.user).select_related(
+            "trade"
+        )
+        positions = TradeParticipation.objects.filter(user=request.user).select_related(
+            "trade"
+        )
+
+        def serialize_trade(trade):
+            return {
+                "id": trade.pk,
+                "title": trade.title,
+                "symbol": trade.symbol,
+                "description": trade.description,
+                "isDemo": trade.is_demo,
+                "entryPrice": str(trade.entry_price),
+                "targetPrice": (
+                    str(trade.target_price) if trade.target_price is not None else None
+                ),
+                "minimumInvestment": str(trade.minimum_investment),
+                "status": trade.status,
+            }
+
+        context = {
+            "title": "Trades",
+            "crumbs": ["Trades"],
+            "crumbs_count": 2,
+            "trade_data": {
+                "csrfToken": get_token(request),
+                "actionUrl": reverse("dashboard-trade-action"),
+                "openTrades": [serialize_trade(trade) for trade in open_trades],
+                "watchlist": [
+                    serialize_trade(item.trade) for item in watchlist
+                ],
+                "positions": [
+                    {
+                        "id": position.pk,
+                        "trade": serialize_trade(position.trade),
+                        "amount": str(position.amount),
+                        "status": position.trade.status,
+                        "payoutAmount": (
+                            str(position.payout_amount)
+                            if position.payout_amount is not None
+                            else None
+                        ),
+                        "paid": position.paid_at is not None,
+                    }
+                    for position in positions
+                ],
+                "messages": [
+                    {"level": message.level_tag, "text": str(message)}
+                    for message in messages.get_messages(request)
+                ],
+            },
+        }
+        return render(request, "dashboard/dashboard_trades.html", context)
+    return redirect("/auth/account/login?next=/dashboard/trades/")
+
+
+@login_required(login_url="account_login")
+@update_user_ip
+@deposit_before
+@require_POST
+def dashboard_trade_action_view(request):
+    action = request.POST.get("action")
+    trade_id = request.POST.get("trade_id")
+
+    try:
+        if action == "take":
+            take_trade(
+                user=request.user,
+                trade_id=trade_id,
+                amount=request.POST.get("amount"),
+            )
+            messages.success(request, "You have joined the trade.")
+        elif action == "watch":
+            add_to_watchlist(user=request.user, trade_id=trade_id)
+            messages.success(request, "Trade added to your watchlist.")
+        elif action == "unwatch":
+            remove_from_watchlist(user=request.user, trade_id=trade_id)
+            messages.success(request, "Trade removed from your watchlist.")
+        else:
+            raise ValidationError("Choose a valid trade action.")
+    except ValidationError as error:
+        messages.error(request, " ".join(error.messages))
+
+    return redirect("dashboard-trades")
 
 
 @update_user_ip

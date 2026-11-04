@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
 
-#dashboard-widget-root {
+#dashboard-widget-root,
+#trades-widget-root {
   --dash-background: #f7f8fa;
   --dash-foreground: #17243b;
   --dash-muted: #788599;
@@ -19,7 +20,10 @@
 
 #dashboard-widget-root *,
 #dashboard-widget-root *::before,
-#dashboard-widget-root *::after {
+#dashboard-widget-root *::after,
+#trades-widget-root *,
+#trades-widget-root *::before,
+#trades-widget-root *::after {
   box-sizing: border-box;
 }
 
@@ -597,6 +601,192 @@
   font-size: 9px;
 }
 
+.trades-dashboard .dashboard-heading {
+  align-items: center;
+}
+
+.trades-dashboard .dashboard-heading > .ui-badge {
+  min-height: 26px;
+  padding: 0 10px;
+  font-size: 10px;
+}
+
+.trades-tabs > [role="tablist"] {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.trades-tabs .ui-tabs-trigger {
+  min-height: 30px;
+}
+
+.trade-section-card {
+  min-height: 260px;
+}
+
+.trade-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trade-section-icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #e8ecf3;
+  border-radius: 7px;
+  color: var(--dash-primary);
+  background: #f8f9fb;
+}
+
+.trade-section-card > .ui-card-content {
+  padding: 0;
+}
+
+.trade-section-card .ui-table {
+  min-width: 820px;
+}
+
+.trade-section-card .ui-table-head {
+  height: 39px;
+}
+
+.trade-section-card .ui-table-cell {
+  height: auto;
+  min-height: 60px;
+  white-space: normal;
+}
+
+.trade-opportunity-copy {
+  display: grid;
+  min-width: 140px;
+  gap: 2px;
+}
+
+.trade-opportunity-copy strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #344054;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.trade-opportunity-copy span {
+  color: #788599;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.trade-opportunity-copy small {
+  max-width: 230px;
+  color: #8994a4;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.trade-row-actions {
+  display: flex;
+  min-width: 225px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.trade-action-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+}
+
+.trade-action-form .ui-button {
+  min-height: 30px;
+  font-size: 10px;
+}
+
+.trade-investment-field input {
+  width: 92px;
+  height: 30px;
+  padding: 0 7px;
+  border: 1px solid var(--dash-border);
+  border-radius: 5px;
+  color: #344054;
+  background: #fff;
+  font: inherit;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.trade-investment-field input:focus-visible {
+  outline: 2px solid #6e93f2;
+  outline-offset: 2px;
+}
+
+.trade-message {
+  margin: 0 0 13px;
+  padding: 10px 12px;
+  border: 1px solid #cce8df;
+  border-radius: 6px;
+  color: #18735d;
+  background: #edf8f4;
+  font-size: 11px;
+}
+
+.trade-message-error {
+  border-color: #f1d4d7;
+  color: #a63f4b;
+  background: #fcf1f2;
+}
+
+.brokerage-empty-state strong {
+  color: #344054;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.brokerage-empty-state p {
+  margin: 5px 0 0;
+  color: #788599;
+  font-size: 10px;
+}
+
+.brokerage-card {
+  margin-top: 14px;
+}
+
+.brokerage-card > .ui-card-content {
+  padding-top: 14px;
+}
+
+.brokerage-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px;
+  border: 1px solid #edf0f4;
+  border-radius: 7px;
+  background: #fafbfc;
+}
+
+.brokerage-empty-state .ui-button:disabled {
+  color: #8994a4;
+  background: #f2f4f7;
+  cursor: not-allowed;
+}
+
+.trade-data-note {
+  margin-top: 12px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -635,6 +825,23 @@
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: 19px;
+  }
+
+  .trades-dashboard .dashboard-heading {
+    align-items: flex-start;
+  }
+
+  .trades-tabs > [role="tablist"] {
+    width: 100%;
+  }
+
+  .trades-tabs .ui-tabs-trigger {
+    flex: 1 1 45%;
+  }
+
+  .brokerage-empty-state {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .dashboard-heading h1 {
@@ -702,7 +909,10 @@
 @media (prefers-reduced-motion: reduce) {
   #dashboard-widget-root *,
   #dashboard-widget-root *::before,
-  #dashboard-widget-root *::after {
+  #dashboard-widget-root *::after,
+  #trades-widget-root *,
+  #trades-widget-root *::before,
+  #trades-widget-root *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }

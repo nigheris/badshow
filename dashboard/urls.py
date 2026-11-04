@@ -5,6 +5,8 @@ from dashboard.views import (
     dashboard_referral_view,
     dashboard_payments_view,
     dashboard_profile_auth_view,
+    dashboard_trade_action_view,
+    dashboard_trades_view,
     dashborad_upgrade_view,
 )
 
@@ -15,6 +17,8 @@ urlpatterns = [
         "profile/auth/", dashboard_profile_auth_view, name="dashboard-password-update"
     ),
     path("payments/", dashboard_payments_view, name="dashboard-payment"),
+    path("trades/", dashboard_trades_view, name="dashboard-trades"),
+    path("trades/action/", dashboard_trade_action_view, name="dashboard-trade-action"),
     path("referral/", dashboard_referral_view, name="dashboard-referral"),
     path("upgrade/", dashborad_upgrade_view, name="dashboard-upgrade"),
 ]

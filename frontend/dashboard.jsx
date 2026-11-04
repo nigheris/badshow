@@ -4,10 +4,15 @@ import {
   ArrowDownLeft,
   ArrowRight,
   ArrowUpRight,
+  Bookmark,
+  Briefcase,
+  Clock3,
   Eye,
   EyeOff,
+  Landmark,
   Plus,
   RefreshCw,
+  TrendingUp,
   WalletCards,
 } from "lucide-react";
 import {
@@ -306,6 +311,324 @@ function TransactionTable({ transactions, compact = false }) {
         })}
       </TableBody>
     </Table>
+  );
+}
+
+const tradeSections = [
+  {
+    value: "available",
+    label: "Open trades",
+    title: "Open trades",
+    description: "Open opportunities available to join",
+    icon: TrendingUp,
+  },
+  {
+    value: "my-open",
+    label: "My open trades",
+    title: "Your open trades",
+    description: "Your active positions",
+    icon: Clock3,
+  },
+  {
+    value: "watchlist",
+    label: "Watchlist",
+    title: "Trades to watch",
+    description: "Open opportunities you are keeping an eye on",
+    icon: Bookmark,
+  },
+  {
+    value: "closed",
+    label: "Closed trades",
+    title: "Closed trades",
+    description: "Your positions in closed opportunities",
+    icon: Briefcase,
+  },
+];
+
+function TradeActionForm({ action, actionUrl, csrfToken, tradeId, amount, children }) {
+  return (
+    <form method="post" action={actionUrl} className="trade-action-form">
+      <input type="hidden" name="csrfmiddlewaretoken" value={csrfToken} />
+      <input type="hidden" name="action" value={action} />
+      <input type="hidden" name="trade_id" value={tradeId} />
+      {amount}
+      {children}
+    </form>
+  );
+}
+
+function TradeOpportunityTable({
+  trades,
+  actionUrl,
+  csrfToken,
+  watchlistIds,
+}) {
+  if (!trades.length) {
+    return (
+      <p className="empty-state">
+        No trade opportunities to show. Check back later for new listings.
+      </p>
+    );
+  }
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Opportunity</TableHead>
+          <TableHead>Entry price</TableHead>
+          <TableHead>Target price</TableHead>
+          <TableHead>Minimum</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {trades.map((trade) => (
+          <TableRow key={trade.id}>
+            <TableCell>
+              <div className="trade-opportunity-copy">
+                <strong>
+                  {trade.title}
+                  {trade.isDemo && <Badge variant="warning">Demo</Badge>}
+                </strong>
+                <span>{trade.symbol}</span>
+                {trade.description && <small>{trade.description}</small>}
+              </div>
+            </TableCell>
+            <TableCell>{formatCurrency(parseAmount(trade.entryPrice))}</TableCell>
+            <TableCell>
+              {trade.targetPrice
+                ? formatCurrency(parseAmount(trade.targetPrice))
+                : "--"}
+            </TableCell>
+            <TableCell>{formatCurrency(parseAmount(trade.minimumInvestment))}</TableCell>
+            <TableCell>
+              <div className="trade-row-actions">
+                {trade.status === "open" ? (
+                  <TradeActionForm
+                    action="take"
+                    actionUrl={actionUrl}
+                    csrfToken={csrfToken}
+                    tradeId={trade.id}
+                    amount={(
+                      <label className="trade-investment-field">
+                        <span className="sr-only">Investment amount for {trade.symbol}</span>
+                        <input
+                          type="number"
+                          name="amount"
+                          min={trade.minimumInvestment}
+                          step="0.01"
+                          defaultValue={trade.minimumInvestment}
+                          required
+                        />
+                      </label>
+                    )}
+                  >
+                    <Button size="sm" type="submit">Take trade</Button>
+                  </TradeActionForm>
+                ) : (
+                  <Badge variant="muted">Closed</Badge>
+                )}
+                <TradeActionForm
+                  action={watchlistIds.has(trade.id) ? "unwatch" : "watch"}
+                  actionUrl={actionUrl}
+                  csrfToken={csrfToken}
+                  tradeId={trade.id}
+                >
+                  <Button size="sm" variant="outline" type="submit">
+                    {watchlistIds.has(trade.id) ? "Remove watch" : "Watch"}
+                  </Button>
+                </TradeActionForm>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+function TradePositionsTable({ positions, closed = false }) {
+  if (!positions.length) {
+    return (
+      <p className="empty-state">
+        {closed
+          ? "You have no positions in closed trades."
+          : "You have not joined any open trades yet."}
+      </p>
+    );
+  }
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Trade</TableHead>
+          <TableHead>Entry price</TableHead>
+          <TableHead>Invested</TableHead>
+          {closed && <TableHead>Payout</TableHead>}
+          <TableHead>Status</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {positions.map((position) => (
+          <TableRow key={position.id}>
+            <TableCell>
+              <div className="trade-opportunity-copy">
+                <strong>{position.trade.title}</strong>
+                <span>{position.trade.symbol}</span>
+              </div>
+            </TableCell>
+            <TableCell>{formatCurrency(parseAmount(position.trade.entryPrice))}</TableCell>
+            <TableCell>{formatCurrency(parseAmount(position.amount))}</TableCell>
+            {closed && (
+              <TableCell>
+                {position.paid
+                  ? formatCurrency(parseAmount(position.payoutAmount))
+                  : "Pending"}
+              </TableCell>
+            )}
+            <TableCell>
+              <Badge variant={position.paid ? "positive" : closed ? "warning" : "muted"}>
+                {position.paid ? "Paid" : closed ? "Awaiting payout" : "Open"}
+              </Badge>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+function TradeSection({
+  section,
+  trades,
+  positions,
+  actionUrl,
+  csrfToken,
+  watchlistIds,
+}) {
+  const Icon = section.icon;
+  const isOfferList = section.value === "available" || section.value === "watchlist";
+  const isClosed = section.value === "closed";
+  const sectionTrades = section.value === "watchlist"
+    ? trades.filter((trade) => watchlistIds.has(trade.id))
+    : trades;
+  const sectionPositions = positions.filter((position) =>
+    isClosed
+      ? position.status === "closed"
+      : position.status === "open",
+  );
+
+  return (
+    <Card className="trade-section-card">
+      <CardHeader>
+        <div className="trade-section-heading">
+          <span className="trade-section-icon"><Icon size={16} /></span>
+          <div>
+            <CardTitle>{section.title}</CardTitle>
+            <CardDescription>{section.description}</CardDescription>
+          </div>
+        </div>
+        <Badge variant="muted">
+          {isOfferList ? sectionTrades.length : sectionPositions.length}
+        </Badge>
+      </CardHeader>
+      <CardContent className="table-content">
+        {isOfferList ? (
+          <TradeOpportunityTable
+            trades={sectionTrades}
+            actionUrl={actionUrl}
+            csrfToken={csrfToken}
+            watchlistIds={watchlistIds}
+          />
+        ) : (
+          <TradePositionsTable positions={sectionPositions} closed={isClosed} />
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+export function TradePage({
+  openTrades = [],
+  watchlist = [],
+  positions = [],
+  csrfToken = "",
+  actionUrl = "",
+  messages: pageMessages = [],
+}) {
+  const watchlistIds = new Set(watchlist.map((trade) => trade.id));
+
+  return (
+    <div className="creyp-dashboard trades-dashboard">
+      <header className="dashboard-heading">
+        <div>
+          <p className="dashboard-eyebrow">Investment activity</p>
+          <h1>Trades</h1>
+          <p className="dashboard-subtitle">
+            Review open opportunities and manage your trade positions.
+          </p>
+        </div>
+        <Badge variant="warning">Internal wallet only</Badge>
+      </header>
+
+      {pageMessages.map((message, index) => (
+        <div className={`trade-message trade-message-${message.level}`} role="status" key={`${index}-${message.text}`}>
+          {message.text}
+        </div>
+      ))}
+
+      <Tabs.Root defaultValue="available" className="dashboard-tabs trades-tabs">
+        <Tabs.List aria-label="Trade sections">
+          {tradeSections.map((section) => (
+            <Tabs.Trigger value={section.value} key={section.value}>
+              {section.label}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
+        {tradeSections.map((section) => (
+          <Tabs.Content value={section.value} key={section.value}>
+            <TradeSection
+              section={section}
+              trades={section.value === "watchlist" ? watchlist : openTrades}
+              positions={positions}
+              actionUrl={actionUrl}
+              csrfToken={csrfToken}
+              watchlistIds={watchlistIds}
+            />
+          </Tabs.Content>
+        ))}
+      </Tabs.Root>
+
+      <Card className="brokerage-card" id="brokerage-accounts">
+        <CardHeader>
+          <div className="trade-section-heading">
+            <span className="trade-section-icon"><Landmark size={16} /></span>
+            <div>
+              <CardTitle>Brokerage accounts</CardTitle>
+              <CardDescription>Accounts connected for trade activity</CardDescription>
+            </div>
+          </div>
+          <Badge variant="muted">Not connected</Badge>
+        </CardHeader>
+        <CardContent>
+          <div className="brokerage-empty-state">
+            <div>
+              <strong>No brokerage accounts connected</strong>
+              <p>Taking a trade deducts funds from your Creyp wallet; it does not place an order with a brokerage.</p>
+            </div>
+            <Button variant="outline" disabled type="button">
+              <Plus size={15} /> Connect account
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <p className="dashboard-data-note trade-data-note">
+        Trade prices are listing information, not investment advice. Closed trades require an administrator to enter and pay out a settlement.
+      </p>
+    </div>
   );
 }
 
